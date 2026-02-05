@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amr Ayyad | BI Developer & Data Consultant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-purple: #6a11cb;
+            --secondary-purple: #7b2cbf;
+            --light-purple: #9d4edd;
+            --accent-orange: #ff9e00;
+            --dark-orange: #ff7b00;
+            --dark-bg: #0f0c1d;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --text-light: #f0f0f0;
+            --text-muted: #b0b0b0;
+            --transition: all 0.3s ease;
+            --border-radius: 16px;
+            --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(107, 33, 168, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 158, 0, 0.08) 0%, transparent 20%);
+            min-height: 100vh;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(90deg, var(--primary-purple), var(--accent-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            color: var(--light-purple);
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-orange), var(--primary-purple));
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--text-light);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+        
+        a {
+            color: var(--accent-orange);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--light-purple);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        /* Header & Navigation */
+        header {
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(15, 12, 29, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: var(--glass-border);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, var(--primary-purple), var(--accent-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .logo span {
+            color: var(--accent-orange);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-orange);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-orange);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+        }
+        
+        /* Glass Cards */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            border: var(--glass-border);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            height: 100%;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 158, 0, 0.2);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding-top: 3rem;
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .highlight {
+            color: var(--accent-orange);
+            font-weight: 500;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .contact-item i {
+            color: var(--accent-orange);
+        }
+        
+        /* Section Styles */
+        .section-intro {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 3rem;
+        }
+        
+        .funny-note {
+            background: linear-gradient(90deg, rgba(255, 158, 0, 0.1), rgba(106, 17, 203, 0.1));
+            border-left: 4px solid var(--accent-orange);
+            padding: 1rem;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin: 2rem 0;
+            font-style: italic;
+        }
+        
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        /* Experience & Education */
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent-orange);
+            border-radius: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background-color: rgba(255, 158, 0, 0.3);
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        .timeline-date {
+            color: var(--accent-orange);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-role {
+            color: var(--light-purple);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .skill-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+        
+        .skill-item:hover {
+            background: rgba(255, 158, 0, 0.1);
+            border-color: rgba(255, 158, 0, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        /* Projects */
+        .project-card {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            border: var(--glass-border);
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .project-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(90deg, var(--primary-purple), var(--secondary-purple));
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .project-btn:hover {
+            background: linear-gradient(90deg, var(--secondary-purple), var(--primary-purple));
+            transform: translateY(-3px);
+            color: white;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
+        }
+        
+        .project-btn.secondary {
+            background: rgba(255, 158, 0, 0.1);
+            color: var(--accent-orange);
+            border: 1px solid rgba(255, 158, 0, 0.3);
+        }
+        
+        .project-btn.secondary:hover {
+            background: rgba(255, 158, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(255, 158, 0, 0.2);
+        }
+        
+        /* Publications */
+        .pub-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .pub-item:last-child {
+            border-bottom: none;
+        }
+        
+        .pub-title {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            border-top: var(--glass-border);
+            margin-top: 3rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .social-icon:hover {
+            background: var(--accent-orange);
+            color: var(--dark-bg);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(15, 12, 29, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+                border-bottom: var(--glass-border);
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.3rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            section {
+                padding: 3rem 0;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .project-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Amr<span>Ayyad</span></div>
+                <button class="mobile-menu-btn" id="menuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Amr Ayyad, MSc</h1>
+                <p class="tagline">BI Developer & Data Consultant</p>
+                <p>Data and Business Intelligence Professional with over 5 years of experience driving data strategy, analytics solutions, and BI enablement across multinational corporations, government initiatives, and academic institutions.</p>
+                
+                <div class="funny-note">
+                    <p>I turn data chaos into beautiful, actionable insights. Like a data whisperer, but with more SQL and less mysticism.</p>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:amro.m.ayyad@gmail.com">amro.m.ayyad@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+201156766566">(+20) 115-676-6566</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <a href="http://www.linkedin.com/in/amr-m-ayyad" target="_blank">linkedin.com/in/amr-m-ayyad</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p class="section-intro">Proven expertise in Python, SQL, Power BI, Tableau, and advanced statistical tools to design scalable, insight-driven analytics ecosystems. Adept at leading cross-functional teams, developing high-impact training programs, and aligning data solutions with business objectives.</p>
+            
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>Education</h3>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2022 - 2025</div>
+                        <div class="timeline-role">Master's Degree in Science</div>
+                        <p>Microbiology and Immunology (MSc)<br>Faculty of Science, Mansoura University, Egypt</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2020 - 2021</div>
+                        <div class="timeline-role">Diploma in Forensic Science</div>
+                        <p>Faculty of Science, Zagazig University, Egypt</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2013 - 2017</div>
+                        <div class="timeline-role">Bachelor's Degree in Science</div>
+                        <p>Microbiology and Immunology (BSc)<br>Faculty of Science, Mansoura University, Egypt</p>
+                    </div>
+                </div>
+                
+                <div class="glass-card">
+                    <h3>Certifications</h3>
+                    <p><span class="highlight">Stanford Deep Data Research Center:</span> Fundamentals of Data Science in Precision Medicine and Cloud Computing</p>
+                    <p><span class="highlight">Huawei:</span> Huawei Cloud Certified Developer Associate (HCCDA)</p>
+                    <p><span class="highlight">Stanford University:</span> Machine Learning Specialization</p>
+                    <p><span class="highlight">University of Michigan:</span> Statistics with Python Specialization</p>
+                    <p><span class="highlight">Udacity:</span> Data Analysis Professional Nanodegree</p>
+                    <p><span class="highlight">DataCamp:</span> SQL Associate Certification</p>
+                    
+                    <div class="funny-note">
+                        <p>Yes, I collect certifications like some people collect stamps. Each one tells a story of late nights and countless cups of coffee.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2>Professional Experience</h2>
+            <p class="section-intro">Recognized for transforming raw data into strategic insights, architecting end-to-end BI workflows, and fostering data literacy across organizations.</p>
+            
+            <div class="grid-2">
+                <div class="glass-card">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Mar 2024 - Present</div>
+                        <div class="timeline-role">Founder & Director of Learning and Development</div>
+                        <p>Empirici Academy</p>
+                        <p>Designed and implemented training programs to enhance employee skills and performance. Assessed training needs and developed curricula to address gaps. Supervised a team of trainers and overseeing their activities.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Apr 2024 - Present</div>
+                        <div class="timeline-role">Training Specialist</div>
+                        <p>Digital Egypt Pioneers Initiative (DEPI), MICT, Egypt</p>
+                        <p>Developed and delivered training programs for data analytics tracks. Led virtual classrooms of 200+ learners, using interactive teaching strategies to boost engagement and retention.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Feb 2023 - Feb 2024</div>
+                        <div class="timeline-role">Business Intelligence Reporting Specialist</div>
+                        <p>LHH, Florida, United States</p>
+                        <p>Developed key business intelligence reports and dashboards using BI tools. Extracted, transformed, and loaded data from diverse sources using SQL and ETL processes for reporting and analysis.</p>
+                    </div>
+                </div>
+                
+                <div class="glass-card">
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 2021 - Dec 2022</div>
+                        <div class="timeline-role">Market Risk Analyst</div>
+                        <p>DBS Bank, Singapore</p>
+                        <p>Identified and analyzed market risk issues, contributing to the development of mitigation strategies. Developed and utilized data visualization tools for risk reporting and monitoring.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">May 2020 - Mar 2021</div>
+                        <div class="timeline-role">People Analytics Specialist</div>
+                        <p>Suncor Energy, Alberta, Canada</p>
+                        <p>Analyzed HR data to identify key trends and provide actionable insights for improving employee engagement and retention. Developed data visualizations and reports to communicate complex HR metrics.</p>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">Feb 2022 - Oct 2023</div>
+                        <div class="timeline-role">Data & Analytics Consultant</div>
+                        <p>Upwork</p>
+                        <p>Provided data analysis and business intelligence consulting services to various clients across industries.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <p class="section-intro">A selection of my recent data analysis and business intelligence projects showcasing end-to-end analytics workflows.</p>
+            
+            <div class="grid-3">
+                <!-- Energy Consumption Project -->
+                <div class="glass-card project-card">
+                    <img src="https://raw.githubusercontent.com/ayyadayyad/Energy-Consumption/refs/heads/main/pic.PNG" alt="Energy Consumption Dashboard" class="project-image">
+                    <h3>Energy Consumption Analysis</h3>
+                    <p>Comprehensive analysis of energy consumption patterns using Power BI. Transformed raw data into actionable insights through data cleaning, transformation, modeling, and visualization.</p>
+                    <p><span class="highlight">Key Insights:</span> Residential consumption shows 15% increase in winter, commercial usage peaks 40% higher during business hours, urban areas account for 65% of total consumption.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/ayyadayyad/Energy-Consumption" target="_blank" class="project-btn">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                        <a href="https://raw.githubusercontent.com/ayyadayyad/Energy-Consumption/refs/heads/main/jeff.GIF" target="_blank" class="project-btn secondary">
+                            <i class="fas fa-play-circle"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Placeholder Project 1 -->
+                <div class="glass-card project-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Market Risk Dashboard" class="project-image">
+                    <h3>Market Risk Visualization Platform</h3>
+                    <p>Interactive dashboard for monitoring market risk exposures and exceptions. Built with Tableau and Power BI to provide real-time risk assessment and reporting capabilities.</p>
+                    <p><span class="highlight">Features:</span> Real-time risk monitoring, limit exception alerts, historical trend analysis, predictive risk modeling integration.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-btn">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                        <a href="#" class="project-btn secondary">
+                            <i class="fas fa-external-link-alt"></i> Case Study
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Placeholder Project 2 -->
+                <div class="glass-card project-card">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="HR Analytics Dashboard" class="project-image">
+                    <h3>People Analytics Dashboard</h3>
+                    <p>HR analytics platform for tracking employee engagement, retention, and performance metrics. Developed using Python, SQL, and Power BI with statistical analysis capabilities.</p>
+                    <p><span class="highlight">Impact:</span> Identified key factors affecting employee turnover, predicted retention risks with 85% accuracy, enabled data-driven HR decision making.</p>
+                    <div class="project-links">
+                        <a href="#" class="project-btn">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                        <a href="#" class="project-btn secondary">
+                            <i class="fas fa-chart-bar"></i> View Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2>Skills</h2>
+            <p class="section-intro">Technical and personal skills honed through years of professional experience across diverse industries and roles.</p>
+            
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>Technical Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">Python</div>
+                        <div class="skill-item">SQL</div>
+                        <div class="skill-item">Power BI</div>
+                        <div class="skill-item">Tableau</div>
+                        <div class="skill-item">Excel/Spreadsheets</div>
+                        <div class="skill-item">Data Visualization</div>
+                        <div class="skill-item">Statistical Analysis</div>
+                        <div class="skill-item">ETL Processes</div>
+                        <div class="skill-item">Data Warehousing</div>
+                        <div class="skill-item">Machine Learning</div>
+                        <div class="skill-item">SPSS / Minitab</div>
+                        <div class="skill-item">SAS JMP</div>
+                    </div>
+                </div>
+                
+                <div class="glass-card">
+                    <h3>Personal Skills & Languages</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">Communication</div>
+                        <div class="skill-item">Team Leadership</div>
+                        <div class="skill-item">Curriculum Design</div>
+                        <div class="skill-item">Problem Solving</div>
+                        <div class="skill-item">Time Management</div>
+                        <div class="skill-item">Attention to Detail</div>
+                    </div>
+                    
+                    <div class="funny-note" style="margin-top: 2rem;">
+                        <p><span class="highlight">Languages:</span> English (Professional Fluency), Arabic (Native), Japanese (Elementary), Spanish (Elementary). I can ask for data in four languages, but the insights are universal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications">
+        <div class="container">
+            <h2>Publications</h2>
+            <p class="section-intro">Research papers and publications demonstrating the intersection of data science with biological and medical applications.</p>
+            
+            <div class="glass-card">
+                <div class="pub-item">
+                    <h4 class="pub-title">Response surface optimization of sedimentation efficiency for sustainable green microalgae harvesting using automated non-invasive methods (2025)</h4>
+                    <p><a href="https://doi.org/10.1186/s12934-025-02765-2" target="_blank">doi.org/10.1186/s12934-025-02765-2</a></p>
+                </div>
+                
+                <div class="pub-item">
+                    <h4 class="pub-title">Optimization of flocculation parameters for efficient microalgal biomass harvesting: a response surface methodology approach (2025)</h4>
+                    <p><a href="https://www.researchgate.net/publication/390947011" target="_blank">researchgate.net/publication/390947011</a></p>
+                </div>
+                
+                <div class="pub-item">
+                    <h4 class="pub-title">Significance of siderophore-producing cyanobacteria on enhancing iron uptake potentiality of maize plants grown under iron-deficiency (2024)</h4>
+                    <p><a href="https://doi.org/10.1186/s12934-024-02618-4" target="_blank">doi.org/10.1186/s12934-024-02618-4</a></p>
+                </div>
+                
+                <div class="pub-item">
+                    <h4 class="pub-title">Maize plant development and antioxidant defense influenced by selenium-enriched Cyanobacteria species (2024)</h4>
+                    <p><a href="https://doi.org/10.1016/j.sajb.2024.12.033" target="_blank">doi.org/10.1016/j.sajb.2024.12.033</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <p class="section-intro">Interested in collaborating on a data project or need BI consulting? Feel free to reach out!</p>
+            
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>Contact Information</h3>
+                    <div class="contact-info" style="flex-direction: column; align-items: flex-start; gap: 1.5rem;">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <p style="margin-bottom: 0.2rem;">Email</p>
+                                <a href="mailto:amro.m.ayyad@gmail.com">amro.m.ayyad@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <p style="margin-bottom: 0.2rem;">Phone</p>
+                                <a href="tel:+201156766566">(+20) 115-676-6566</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <div>
+                                <p style="margin-bottom: 0.2rem;">LinkedIn</p>
+                                <a href="http://www.linkedin.com/in/amr-m-ayyad" target="_blank">linkedin.com/in/amr-m-ayyad</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass-card">
+                    <h3>What I'm Looking For</h3>
+                    <p>I'm currently open to:</p>
+                    <ul style="padding-left: 1.5rem; margin-bottom: 1.5rem; color: var(--text-muted);">
+                        <li>BI Developer roles</li>
+                        <li>Data Consultant projects</li>
+                        <li>Data Analytics training opportunities</li>
+                        <li>Research collaborations at the intersection of data science and biology</li>
+                    </ul>
+                    
+                    <div class="funny-note">
+                        <p>I promise not to over-engineer your data solutions. Unless you want me to. Then I'll over-engineer them beautifully.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="http://www.linkedin.com/in/amr-m-ayyad" target="_blank" class="social-icon">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/ayyadayyad" target="_blank" class="social-icon">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="mailto:amro.m.ayyad@gmail.com" class="social-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://www.researchgate.net/profile/Amr-Ayyad" target="_blank" class="social-icon">
+                    <i class="fab fa-researchgate"></i>
+                </a>
+            </div>
+            
+            <p class="copyright">© 2025 Amr Ayyad. All rights reserved. | BI Developer & Data Consultant</p>
+            <p class="copyright" style="font-size: 0.8rem; margin-top: 0.5rem;">Crafted with data, code, and a hint of purple-orange magic.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.backgroundColor = 'rgba(15, 12, 29, 0.95)';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.2)';
+            } else {
+                header.style.backgroundColor = 'rgba(15, 12, 29, 0.9)';
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
